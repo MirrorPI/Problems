@@ -3,16 +3,13 @@ using namespace std;
 
 int main(){
     int A, B;
-    int BHundreds, BTens, BUnits;
-    cin>>A>>B;
-    BHundreds = B/100;
-    BTens = (B-BHundreds*100)/10;
-    BUnits = (B-BHundreds*100-BTens*10);
+    int BH, BT, BU;
+    scanf("%d %d", &A, &B);
+    BH = B/100;
+    BT = (B%100)/10;
+    BU = B%10;
 
-    cout<<A*BUnits<<endl;
-    cout<<A*BTens<<endl;
-    cout<<A*BHundreds<<endl;
-    cout<<A*B;
+    printf("%d\n%d\n%d\n%d",BU*A, BT*A, BH*A, B*A);
 
     return 0;
 }
