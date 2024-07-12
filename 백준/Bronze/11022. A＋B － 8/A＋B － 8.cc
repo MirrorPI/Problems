@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int T;
+    int a, b;
+    scanf("%d", &T);
+    for(int i=1; i<=T; i++){   
+        scanf("%d %d", &a, &b);
+        printf("Case #%d: %d + %d = %d\n", i, a, b, a+b);
+    }
+
+    return 0;
+}
