@@ -1,23 +1,26 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 int main(){
     int n;
+    int num;
     scanf("%d", &n);
-    int nums[n];
     int max = -1000000;
     int min = 1000000;
-    for(int i=0; i<n; i++){
-        scanf("%d",&nums[i]);
 
-        if(min > nums[i]){
-            min = nums[i];
+    for(int i=0; i<n; i++){
+        scanf("%d", &num);
+
+        if(max < num){
+            max = num;
         }
 
-        if(max < nums[i]){
-            max = nums[i];
+        if(min > num){
+            min = num;
         }
     }
     printf("%d %d", min, max);
 
+    return 0;
 }
