@@ -1,21 +1,19 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 int main(){
+    int size = 9;
     int nums[9];
-    int max;
-    int maxIndex = 1;
 
     for(int i=0; i<9; i++){
         scanf("%d", &nums[i]);
     }
-    max = nums[0];
-    for(int j=1; j<9; j++){
-        if(max < nums[j]){
-            max = nums[j];
-            maxIndex = j+1;
-        }
-    }
 
-    printf("%d\n%d", max, maxIndex);
+    int* maxPointer = max_element(nums, nums+size);
+    int maxIndex = maxPointer - nums;
+
+    printf("%d\n%d", *maxPointer, maxIndex+1);
+
+    return 0;
 }
