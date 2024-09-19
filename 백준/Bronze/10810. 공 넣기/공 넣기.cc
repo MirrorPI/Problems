@@ -1,26 +1,21 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main(){
-    int N, M;
-    scanf("%d %d", &N, &M);
-    int basket[N];
-    int a, b, c;
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, m; cin>>n>>m;
+    vector<int> basket(n, 0);
 
-    for(int i=0; i<N; i++){
-        basket[i] = 0;
-    }
-
-    for(int j=0; j<M; j++){
-        scanf("%d %d %d",&a, &b, &c);
-        for(int k=a; k<=b; k++){
-            basket[k-1] = c;
+    for(int i=0; i<m; i++){
+        int a, b, c; cin>>a>>b>>c;
+        for(int j=a; j<=b; j++){
+            basket[j-1] = c;
         }
     }
-
-    for(int l=0; l<N; l++){
-        printf("%d ",basket[l]);
+    for(int num : basket){
+        cout<<num<<' ';
     }
-
     return 0;
 }
