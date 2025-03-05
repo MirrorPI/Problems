@@ -1,64 +1,69 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+
+import java.util.*;
+import java.io.*;
 
 public class Main {
 
-static int R;
-static int C;
-static char[][] map;
-static final int[] dx = {-1, 0, 1};  //우상 우 우하
-static final int dy = 1;
-static boolean[][] visited;
-static int result = 0;
+	private static int R, C, answer;
+	private static boolean isReached;
+
+	private static int[] dx = { -1, 0, 1 };
+	private static int[] dy = { 1, 1, 1 };
+
+	private static boolean[][] visited;
+	private static char[][] map;
 
 	public static void main(String[] args) throws IOException {
-	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	    StringTokenizer st = new StringTokenizer(br.readLine());
-	    
-	    R = Integer.parseInt(st.nextToken());
-	    C = Integer.parseInt(st.nextToken());
-	    map = new char[R][C]; //지도.
-	    
-	    for(int i=0; i<R; i++) {
-	        String data = br.readLine();
-	        for(int j=0; j<C; j++) {
-	            map[i][j] = data.charAt(j);
-	        }
-	    }
-	    visited = new boolean[R][C];
-        for(int i=0; i<R; i++) {
-            int x=i;
-            int y=0;
-            findPipeLine(x, y);
-            if(visited[R-1][C-1]) {
-            	break;
-            }
-        }
-        System.out.print(result);
-        br.close();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		R = Integer.parseInt(st.nextToken());
+		C = Integer.parseInt(st.nextToken());
+
+		map = new char[R + 1][C + 1];
+		for (int i = 0; i < R; i++) {
+			String input = br.readLine();
+			for (int j = 0; j < C; j++) {
+				map[i][j] = input.charAt(j);
+			}
+		}
+
+		visited = new boolean[R][C];
+		for (int i = 0; i < R; i++) {
+			isReached = false;
+			search(i, 0);
+		}
+
+		sb.append(answer);
+
+		bw.write(sb.toString());
+		bw.flush();
+
+		bw.close();
+		br.close();
+
 	}
-	    public static boolean findPipeLine(int x, int y) {
-	        if(x==-1 || x==R) return false;
-	
-	        if(y == C-1) {
-	            result++;
-	            visited[x][y] = true;
-	            return true;
-	        }
-	
-	        if(visited[x][y] || map[x][y] == 'x') return false;
-	
-	        visited[x][y] = true;
-	       
-	    if(!findPipeLine(x-1, y+1)) {
-	        if(!findPipeLine(x, y+1)) {
-	            if(!findPipeLine(x+1, y+1)) {
-	                return false;
-	            }
-	        }
-	    }
-	    return true;
+
+	private static void search(int r, int c) {
+		if (c == C - 1) {
+			answer++;
+			isReached = true;
+		}
+
+		for (int i = 0; i < 3 && !isReached; i++) {
+			int nx = r + dx[i], ny = c + dy[i];
+
+			if (nx < 0 || nx >= R || ny < 0 || ny >= C)
+				continue;
+			if (map[nx][ny] == 'x')
+				continue;
+			if (visited[nx][ny])
+				continue;
+
+			visited[nx][ny] = true;
+			search(nx, ny);
+		}
 	}
 }
