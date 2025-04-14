@@ -59,8 +59,10 @@ public class Main {
 
                 if(nm > M || nt > T ) continue;
 
-                time[np][nm] = nt;
-                pq.add(new int[] {np, nt, nm});
+                if(time[np][nm] > nt){
+                    time[np][nm] = nt;
+                    pq.add(new int[] {np, nt, nm});
+                }
             }
         }
         int ans = -1;
