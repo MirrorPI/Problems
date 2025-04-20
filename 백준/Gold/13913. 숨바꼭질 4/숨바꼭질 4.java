@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
@@ -18,16 +19,17 @@ public class Main {
         min = new int[max]; Arrays.fill(min, max);
         prev = new int[max]; Arrays.fill(prev, -1);
         solve(N);
-        
-        System.out.println(min[K]);
+
+        sb.append(min[K]).append("\n");
         List<Integer> path = new ArrayList<>();
         for (int cur = K; cur != -1; cur = prev[cur]) {
             path.add(cur);
         }
         Collections.reverse(path);
         for (int p : path) {
-            System.out.print(p + " ");
+            sb.append(p).append(" ");
         }
+        System.out.print(sb);
         br.close();
     }
 
