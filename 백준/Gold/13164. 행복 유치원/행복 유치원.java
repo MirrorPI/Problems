@@ -10,12 +10,14 @@ public class Main {
 
     static int N, K; //원생 수(1~300,000), 나눌 그룹 수
     static int[] height; //원생들 키(1~1,000,000,000)
-    static int[] diff;
+    static int[] diff; //연속된 원생들의 키차이
     static int ans;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
 
         st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
@@ -30,10 +32,17 @@ public class Main {
             diff[i] = height[i] - height[i-1];
         }
         Arrays.sort(diff);
-        for(int i=1; i<=N-K; i++){
+        for(int i=1; i<=N-K; i++){ //차이가 커서 잘린 부분(여기는 비용 0)을 제외한 차이들의 합
+            //헷갈렸던 것은 (1 2 3 4) 이런식으로 잘리고 남은 부분은 원소가 3개 이상인데
+            //2개짜리 차이의 합으로 구해도 되나싶었다.
+            //하지만 1 2 차이, 2 3 차이, 3 4 차이의 합이 1 4의 차이와 같기 때문에 문제 없다.
             ans += diff[i];
         }
-        System.out.print(ans);
+        sb.append(ans);
+
+        bw.write(sb.toString());
+        bw.flush();
         br.close();
+        bw.close();
     }
 }
