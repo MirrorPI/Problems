@@ -47,7 +47,7 @@ public class Main {
                     if(curW + w >= min[nx][ny]) continue;
 
                     min[nx][ny] = curW + w;
-                    pq.add(new int[] {nx, ny, min[nx][ny]});
+                    pq.add(new int[] {nx, ny, curW + w});
                 }
             }
         }
