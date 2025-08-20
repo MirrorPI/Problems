@@ -5,44 +5,41 @@ public class Main{
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+
         String input = br.readLine();
         int M = Integer.parseInt(br.readLine());
-        Stack<Character> cursorLeft = new Stack<>();
-        Stack<Character> cursorRight = new Stack<>();
-        Stack<Character> answer = new Stack<>();
+        StringBuilder cursorLeft = new StringBuilder();
+        StringBuilder cursorRight = new StringBuilder();
+        StringBuilder out = new StringBuilder();
+
         for(int i=0; i<input.length(); i++){
-            cursorLeft.add(input.charAt(i));
+            cursorLeft.append(input.charAt(i));
         }
         for(int i=0; i<M; i++){
             String command = br.readLine();
             if(command.charAt(0) == 'L'){ //커서를 왼쪽으로
-                if(!cursorLeft.empty()){
-                    cursorRight.add(cursorLeft.pop());
+                int len = cursorLeft.length();
+                if(len > 0){
+                    cursorRight.append(cursorLeft.charAt(len-1));
+                    cursorLeft.setLength(len-1);
                 }
             } else if(command.charAt(0) == 'D'){ //커서를 오른쪽으로
-                if(!cursorRight.empty()){
-                    cursorLeft.add(cursorRight.pop());
+                int len = cursorRight.length();
+                if(len > 0){
+                    cursorLeft.append(cursorRight.charAt(len-1));
+                    cursorRight.setLength(len-1);
                 }
             } else if(command.charAt(0) == 'B'){ //커서 왼쪽 삭제
-                if(!cursorLeft.empty()){
-                    cursorLeft.pop();
+                int len = cursorLeft.length();
+                if(len > 0){
+                    cursorLeft.setLength(len-1);
                 }
             } else { //커서  왼쪽에 문자 추가
-                cursorLeft.add(command.charAt(2));
+                cursorLeft.append(command.charAt(2));
             }
         }
-
-        while(!cursorLeft.empty()){
-            answer.add(cursorLeft.pop());
-        }
-        while(!answer.empty()){
-            sb.append(answer.pop());
-        }
-        while(!cursorRight.empty()){
-            sb.append(cursorRight.pop());
-        }
-        System.out.print(sb);
+        out.append(cursorLeft).append(cursorRight.reverse());
+        System.out.print(out);
         br.close();
     }
 }
