@@ -26,10 +26,19 @@ public class Main {
             if(existed[x]) continue;
             for(int y=x; y<=1000; y++){
                 if(existed[y]) continue;
+                //집합의 숫자가 1000이하인 자연수이지 x, y, z가 1000이하라는 소리가 아니다.
+                //N의 최대가 1000일 때 999, 1000이라는 숫자가 집합에 있다면
+                //x y z = 1 1 1001 인 상황이 최소가 됨.
+                //1001까지인 이유는 집합에서 제외할 숫자의 한계가 1000이고 N의 최댓값도 1000이기 때문에
+                //더 커지는 것은 의미없음
                 for(int z=y; z<=1001; z++){
                     if(existed[z]) continue;
                     ans = Math.min(IN_xyxI(x,y,z), ans);
+
+                    //계산 값이 0 보다 작아진 시점에서 계산 값이 더 커지는 것은 의미없음.
+                    if(N - x * y * z < 0) break;
                 }
+                if(N - x * y < 0) break;
             }
         }
 
