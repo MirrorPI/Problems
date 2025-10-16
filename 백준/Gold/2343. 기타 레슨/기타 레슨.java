@@ -14,14 +14,18 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         lecture = new int[N];
+        int sum = 0;
+        int max = 0;
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<N; i++){
-            int T = Integer.parseInt(st.nextToken());
-            lecture[i] = T;
+            int t = Integer.parseInt(st.nextToken());
+            lecture[i] = t;
+            sum += t;
+            max = Math.max(max, t);
         }
-        int capacityLow = 1;
-        int capacityHigh = 1_000_000_000;
-        int ans = 1_000_000_000;
+        int capacityLow = max;
+        int capacityHigh = sum;
+        int ans = sum;
         while(capacityLow<=capacityHigh){
             int mid = (capacityLow+capacityHigh)/2;
             if(canSave(mid)) {
