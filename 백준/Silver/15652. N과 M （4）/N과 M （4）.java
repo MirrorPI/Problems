@@ -1,9 +1,9 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 
-    static int N, M; //(1~8)
+    static int N, M;
     static int[] arr;
     static StringBuilder sb = new StringBuilder();
 
@@ -13,12 +13,12 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         arr = new int[M];
-        solve(1, 0, 0);
+        solve(0, 1);
         System.out.print(sb);
-        br.close();
     }
-    private static void solve(int n, int idx, int cnt){
-        if(cnt == M){
+
+    public static void solve(int depth, int start){
+        if(depth == M) {
             for(int num : arr){
                 sb.append(num).append(" ");
             }
@@ -26,9 +26,9 @@ public class Main {
             return;
         }
 
-        for(int i=n; i<=N; i++) {
-            arr[idx] = i;
-            solve(i, idx + 1, cnt + 1);
+        for(int i=start; i<=N; i++){
+            arr[depth] = i;
+            solve(depth+1, i);
         }
     }
 }
