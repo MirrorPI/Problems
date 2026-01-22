@@ -14,7 +14,7 @@ public class Main {
             for(int j=0; j<N; j++){
                 sb.append(starMap[i][j]);
             }
-            sb.append('\n');
+            sb.append("\n");
         }
         System.out.print(sb);
     }
