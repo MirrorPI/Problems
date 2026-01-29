@@ -33,11 +33,12 @@ public class Main {
             while(left < right){
                 long sum = value[i] + value[left] + value[right];
 
-                if(Math.abs(sum) < min) {
+                long temp = Math.abs(sum);
+                if(temp < min) {
                     nearZeroNum[0] = value[i];
                     nearZeroNum[1] = value[left];
                     nearZeroNum[2] = value[right];
-                    min = Math.abs(sum);
+                    min = temp;
                 }
 
                 if(sum < 0) {
