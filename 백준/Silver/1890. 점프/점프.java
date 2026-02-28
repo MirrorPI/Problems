@@ -27,6 +27,7 @@ public class Main {
         dp[0][0] = 1;
         for(int x=0; x<N; x++){
             for(int y=0; y<N; y++){
+                if(dp[x][y] == 0) continue;
                 if(map[x][y] == 0) continue;
 
                 int nx = x + map[x][y];
