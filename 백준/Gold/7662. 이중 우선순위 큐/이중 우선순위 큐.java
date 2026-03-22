@@ -37,8 +37,8 @@ public class Main {
                 StringTokenizer st = new StringTokenizer(br.readLine());
                 String cmd = st.nextToken();
                 int n = Integer.parseInt(st.nextToken());
-                Num num = new Num(n);
                 if(cmd.equals("I")) {
+                    Num num = new Num(n);
                     minHeap.add(num);
                     maxHeap.add(num);
                 } else {
