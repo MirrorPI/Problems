@@ -1,43 +1,38 @@
 class Solution {
-    public int solution(String[] arr) {
-        int n = (arr.length + 1) / 2;
+    public int solution(String arr[]) {
+        int len = arr.length;
 
-        int[] nums = new int[n];
-        char[] ops = new char[n - 1];
+        char[] ops = new char[len];
 
-        for (int i = 0; i < n; i++) {
-            nums[i] = Integer.parseInt(arr[i * 2]);
+        for (int i = 1; i < len; i += 2) {
+            ops[i] = arr[i].charAt(0);
         }
 
-        for (int i = 0; i < n - 1; i++) {
-            ops[i] = arr[i * 2 + 1].charAt(0);
-        }
+        int[][] max = new int[len][len];
+        int[][] min = new int[len][len];
 
-        int[][] max = new int[n][n];
-        int[][] min = new int[n][n];
+        for(int i=0; i<len; i+=2) {
+            max[i][i] = Integer.parseInt(arr[i]);
+            min[i][i] = Integer.parseInt(arr[i]);
+        } 
 
-        for (int i = 0; i < n; i++) {
-            max[i][i] = nums[i];
-            min[i][i] = nums[i];
-        }
-
-        for (int gap = 1; gap < n; gap++) {
-            for (int start = 0; start + gap < n; start++) {
+        for(int gap=2; gap<len; gap+=2) {
+            for(int start=0; start+gap<len; start+=2) {
                 int end = start + gap;
-
+                
                 max[start][end] = Integer.MIN_VALUE;
                 min[start][end] = Integer.MAX_VALUE;
-
-                for (int opIdx = start; opIdx < end; opIdx++) {
-                    int leftMax = max[start][opIdx];
-                    int leftMin = min[start][opIdx];
-                    int rightMax = max[opIdx + 1][end];
-                    int rightMin = min[opIdx + 1][end];
-
+                
+                for(int signIdx=start+1; signIdx<end; signIdx+=2) {
+                    int leftMax = max[start][signIdx-1];
+                    int leftMin = min[start][signIdx-1];
+                    int rightMax = max[signIdx+1][end];
+                    int rightMin = min[signIdx+1][end];
+                    
                     int candidateMax;
                     int candidateMin;
-
-                    if (ops[opIdx] == '+') {
+                    
+                    if(ops[signIdx] == '+') {
                         candidateMax = leftMax + rightMax;
                         candidateMin = leftMin + rightMin;
                     } else {
@@ -50,7 +45,7 @@ class Solution {
                 }
             }
         }
-
-        return max[0][n - 1];
+        
+        return max[0][len-1];
     }
 }
