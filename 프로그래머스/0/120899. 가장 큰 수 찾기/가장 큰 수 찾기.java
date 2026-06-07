@@ -2,26 +2,18 @@ import java.util.*;
 
 class Solution {
     
-    class Num {
-        int idx;
-        int num;
-        Num(int idx, int num) {
-            this.idx = idx;
-            this.num = num;
-        }
-    }
-    
     public int[] solution(int[] array) {
         int len = array.length;
-        Num[] nums = new Num[len];
-        for(int i=0; i<len; i++) {
-            nums[i] = new Num(i, array[i]);
+        int max = 0;
+        int maxIdx = 0;
+        for(int i=0; i<len ;i++) {
+            if(array[i] > max) {
+                max = array[i];
+                maxIdx = i;
+            }
         }
-        Arrays.sort(nums, (n1, n2) -> {
-            return Integer.compare(n2.num, n1.num);
-        });
 
-        int[] answer = {nums[0].num, nums[0].idx};
+        int[] answer = {max, maxIdx};
         return answer;
     }
 }
