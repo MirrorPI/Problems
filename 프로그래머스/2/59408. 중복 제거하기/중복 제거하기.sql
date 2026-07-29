@@ -1,7 +1,5 @@
-SELECT COUNT(*) AS count
-FROM (
-SELECT NAME
-FROM ANIMAL_INS
-WHERE NAME IS NOT NULL
-GROUP BY NAME
-) AS T
+select count(*) as count
+from (select name
+from animal_ins
+where name is not null
+group by name) as name_group
