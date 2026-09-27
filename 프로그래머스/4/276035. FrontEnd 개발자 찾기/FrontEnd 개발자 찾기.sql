@@ -10,4 +10,4 @@ WHERE EXISTS (
     WHERE s.CATEGORY = 'Front End'
       AND (d.SKILL_CODE & s.CODE) = s.CODE
 )
-ORDER BY d.ID;
+ORDER BY d.ID asc ;
